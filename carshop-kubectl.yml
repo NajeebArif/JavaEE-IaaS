@@ -10,3 +10,31 @@ spec:
     image: narif/carshop:1
     imagePullPolicy: IfNotPresent
   restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: carshop
+spec:
+  selector:
+    app: carshop
+  ports:
+    - port: 8080
+      name: http
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: carshop
+spec:
+  rules:
+    - host: carshop.kubernetes.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: carshop
+              servicePort: 8080
+---
+

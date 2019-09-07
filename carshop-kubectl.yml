@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: carshop
+  labels:
+    app: carshop
+spec:
+  containers:
+  - name: carshop
+    image: narif/carshop:1
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
